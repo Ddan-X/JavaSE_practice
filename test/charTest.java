@@ -16,6 +16,9 @@ public class charTest {
         String la = "0123456789abcdef";
         int x,y;
 
+        String s = "01: file";
+        boolean f = s.contains("file");
+        System.out.println(f);
 //        byte[] b = d.getBytes();
 //        System.out.println(b[0]);
 //
