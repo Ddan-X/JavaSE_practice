@@ -1,8 +1,6 @@
 package ModuleFour.ChatTest;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -44,7 +42,29 @@ public class ChatReceive implements Runnable{
         try {
             msg = dis.readUTF();
             if(msg.contains("file")){
-                FileDownload.file(client);
+                //FileDownload.file(client);
+                System.out.println("file download...");
+
+                //4.判断文件夹是否存在,不存在则创建
+                File file =  new File("./src/ModuleFour/ChatTest/download");
+                if(!file.exists()){
+                    file.mkdirs();
+                }
+
+                System.out.println("...saving....");
+
+                //5.创建一个本地字节输出流FileOutputStream对象,构造方法中绑定要输出的目的地
+                FileOutputStream fos = new FileOutputStream(file+"\\3.txt");
+                //6.使用网络字节输入流InputStream对象中的方法read,读取客户端上传的文件
+
+                int len =0;
+                byte[] bytes = new byte[1024];
+                while((len = dis.read(bytes))!=-1){
+                    //7.使用本地字节输出流FileOutputStream对象中的方法write,把读取到的文件保存到服务器的硬盘上
+                    fos.write(bytes,0,len);
+                }
+
+                System.out.println("saved");
             }
         } catch (IOException ioException) {
             //ioException.printStackTrace();

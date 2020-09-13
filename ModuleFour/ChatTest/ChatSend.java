@@ -14,6 +14,7 @@ public class ChatSend implements Runnable{
     private boolean isRunning = true;
     private String name;
     private Socket client;
+    Scanner scanner = new Scanner(System.in);
 
     public ChatSend() {
         console = new BufferedReader(new InputStreamReader(System.in));
@@ -58,7 +59,19 @@ public class ChatSend implements Runnable{
             try {
                 if(msg.contains("file")){
                     dos.writeUTF("file");
-                    uploadFile(client);
+                    //uploadFile(client);
+                    //System.out.println("start upload file....., after upload, you will be logout");
+                    System.out.print("Enter the file address: ");
+                    String address = scanner.next();
+                    FileInputStream fis = new FileInputStream(address);
+                    int len = 0;
+                    byte[] bytes = new byte[1024];
+                    while ((len = fis.read(bytes)) != -1) {
+                        //5.使用网络字节输出流OutputStream对象中的方法write,把读取到的文件上传到服务器
+                        dos.write(bytes, 0, len);
+                    }
+                    dos.flush();
+                    fis.close();
                 }else {
                     dos.writeUTF(msg);
                     dos.flush();
@@ -88,12 +101,12 @@ public class ChatSend implements Runnable{
     }
 
 
-    public static void uploadFile(Socket socket){
+    public String uploadFile(Socket socket){
         Scanner scanner = new Scanner(System.in);
         try {
 
             System.out.println("start upload file....., after upload, you will be logout");
-             System.out.println("Enter the file address: ");
+             System.out.print("Enter the file address: ");
              String address = scanner.next();
             //FileInputStream fis = new FileInputStream("./src/ModuleFour/ChatTest/upload.txt");
 
@@ -109,18 +122,22 @@ public class ChatSend implements Runnable{
                 os.write(bytes, 0, len);
             }
 
-            System.out.println("end upload, shutdown");
+            os.close();
+            fis.close();
+            return "file";
+           // System.out.println("end upload, shutdown");
 
-            socket.shutdownOutput();
+
+            //socket.shutdownOutput();
 
 
             //释放资源(FileInputStream,Socket)
-            fis.close();
+
             //socket.close();
         }catch (IOException e){
             e.printStackTrace();
         }
-
+        return "file";
     }
 
     @Override

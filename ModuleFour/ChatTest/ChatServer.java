@@ -87,7 +87,22 @@ public class ChatServer {
                 msg = dis.readUTF();
                 System.out.println(msg);
                 if(msg.contains("file")){
-                    FileServer.file(socket);
+                    //FileServer.file(socket);
+                    File file =  new File("./src/ModuleFour/ChatTest/upload");
+                    if(!file.exists()){
+                        file.mkdirs();
+                    }
+                    FileOutputStream fos = new FileOutputStream(file+"\\66.txt");
+
+                    int len =0;
+                    byte[] bytes = new byte[1024];
+                    while((len = dis.read(bytes))!=-1){
+                        //7.使用本地字节输出流FileOutputStream对象中的方法write,把读取到的文件保存到服务器的硬盘上
+                        fos.write(bytes,0,len);
+                    }
+                    fos.close();
+
+                    System.out.println("saved");
                 }
                 //System.out.println("saved");
             } catch (IOException ioException) {
@@ -106,19 +121,19 @@ public class ChatServer {
             while ((len = fis.read(bytes)) != -1) {
                 //5.使用网络字节输出流OutputStream对象中的方法write,把读取到的文件上传到服务器
                 dos.write(bytes, 0, len);
-
             }
+            dos.flush();
         }
         private void send(String msg){
             if(null != msg && !msg.equals("")){
                 try {
-                    /*if(msg.contains("file")){
-                        FileInputStream fis = new FileInputStream("./src/ModuleFour/ChatTest/upload/2.txt");
+                    if(msg.contains("file")){
+                        FileInputStream fis = new FileInputStream("./src/ModuleFour/ChatTest/upload/5.txt");
                         isFile(fis);
-                    }else{*/
+                    }else{
                         dos.writeUTF(msg);
                         dos.flush();
-                    //}
+                    }
                 } catch (IOException ioException) {
                     //ioException.printStackTrace();
 
@@ -135,9 +150,9 @@ public class ChatServer {
         private void sendToOthers(){
             String msg = receive();
             for(Server s : list_client){
-                if(s == this){
+                /*if(s == this){
                     continue;
-                }
+                }*/
                 s.send(msg);
             }
 

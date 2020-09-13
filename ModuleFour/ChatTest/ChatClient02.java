@@ -22,7 +22,7 @@ public class ChatClient02 {
         new Thread(new ChatSend(client,name)).start();
         new Thread(new ChatReceive(client)).start();
 
-        System.out.println("enter words to active account");
+        System.out.println("只有显示了发送内容才代表发送成功，输入 file 表示发送文件");
 
     }
 }

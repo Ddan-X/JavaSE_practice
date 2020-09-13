@@ -28,7 +28,7 @@ public class FileServer {
 
 
         //5.创建一个本地字节输出流FileOutputStream对象,构造方法中绑定要输出的目的地
-        FileOutputStream fos = new FileOutputStream(file+"\\12.txt");
+        FileOutputStream fos = new FileOutputStream(file+"\\5.txt");
         //6.使用网络字节输入流InputStream对象中的方法read,读取客户端上传的文件
 
         int len =0;

@@ -11,7 +11,7 @@ public class FileDownload {
         //1.创建一个服务器ServerSocket对象,和系统要指定的端口号
         // ServerSocket server = new ServerSocket(8888);
         //2.使用ServerSocket对象中的方法accept,获取到请求的客户端Socket对象
-        System.out.println("file saving...");
+        System.out.println("file download...");
         //Socket socket = server.accept();
         //3.使用Socket对象中的方法getInputStream,获取到网络字节输入流InputStream对象
         InputStream is = socket.getInputStream();
@@ -36,9 +36,10 @@ public class FileDownload {
             fos.write(bytes,0,len);
         }
 
+        System.out.println("saved");
         //8.使用Socket对象中的方法getOutputStream,获取到网络字节输出流OutputStream对象
 
-        socket.getOutputStream().write("下载成功".getBytes());
+        //socket.getOutputStream().write("下载成功".getBytes());
         //10.释放资源(FileOutputStream,Socket,ServerSocket)
         fos.close();
         // socket.close();

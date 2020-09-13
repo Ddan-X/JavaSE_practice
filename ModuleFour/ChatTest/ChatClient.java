@@ -23,7 +23,7 @@ public class ChatClient {
         String name = "01";
         new Thread(new ChatSend(client,name)).start();
         new Thread(new ChatReceive(client)).start();
-        System.out.println("enter 1 to active account, then you can send message or file");
+        System.out.println("只有显示了发送内容才代表发送成功，输入 file 表示发送文件");
 
 
     }
