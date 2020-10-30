@@ -43,8 +43,8 @@ public class ClientInitClose {
      */
     public void clientClose() throws IOException {
         // 3.关闭Socket并释放有关的资源
-        ois.close();
         oos.close();
+        ois.close();
         s.close();
         System.out.println("客户端成功关闭！");
     }

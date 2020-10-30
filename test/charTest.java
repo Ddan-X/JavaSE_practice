@@ -14,6 +14,7 @@ public class charTest {
         int l= c.length();
         System.out.println(l);
         String la = "0123456789abcdef";
+        
         int x,y;
 
         String s = "01: file";

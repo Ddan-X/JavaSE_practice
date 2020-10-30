@@ -27,8 +27,8 @@ public class ServerTest {
 
         } catch (IOException | ClassNotFoundException e) {
 
-          //  sic.serverClose();
-            e.printStackTrace();
+            sic.serverClose();
+            //e.printStackTrace();
         }
     }
 

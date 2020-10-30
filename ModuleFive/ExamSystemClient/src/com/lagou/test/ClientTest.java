@@ -29,8 +29,9 @@ public class ClientTest {
         } finally {
             // 3.调用成员方法实现客户端的关闭操作
             try {
-                cic.clientClose();
+
                 ClientScanner.closeScanner();
+                cic.clientClose();
             } catch (IOException e) {
                 e.printStackTrace();
             }

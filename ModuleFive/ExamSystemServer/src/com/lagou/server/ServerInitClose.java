@@ -1,8 +1,6 @@
 package ModuleFive.ExamSystemServer.src.com.lagou.server;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -26,6 +24,16 @@ public class ServerInitClose {
         return oos;
     }
 
+    public ObjectOutputStream getOos(FileOutputStream fileOutputStream) throws IOException {
+       return new ObjectOutputStream(fileOutputStream);
+
+    }
+
+
+    public ObjectInputStream getOis(FileInputStream fileInputStream) throws IOException {
+        return new ObjectInputStream(fileInputStream);
+    }
+
     /**
      * 自定义成员方法实现服务器的初始化操作
      */
@@ -39,7 +47,7 @@ public class ServerInitClose {
         // 3.使用输入输出流进行通信
         ois = new ObjectInputStream(s.getInputStream());
         oos = new ObjectOutputStream(s.getOutputStream());
-        System.out.println("服务器初始化成功！");
+       // System.out.println("服务器初始化成功！");
     }
 
     /**
@@ -53,4 +61,6 @@ public class ServerInitClose {
         ss.close();
         System.out.println("服务器成功关闭！");
     }
+
+
 }
